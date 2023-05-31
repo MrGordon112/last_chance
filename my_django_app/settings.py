@@ -14,9 +14,9 @@ from pathlib import Path
 import django_heroku
 import dj_database_url
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -28,7 +28,6 @@ SECRET_KEY = 'django-insecure-3js@mmsu$yzonqdda8#z4x462+@@f0q!^*o)fh)y!0%&g%=x$w
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -81,21 +80,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_django_app.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd58fc9jc37q7re',
-        'USER': 'labqfecskailxq',
-        'PASSWORD':'1eb1322d932b08383c13e404525e8c17e2fa9e05613edaba31d3c5231436776e',
-        'HOST':'ec2-3-233-174-23.compute-1.amazonaws.com',
-        'PORT':'5432'
+        'NAME': 'd7b33vcfevcm7c',
+        'USER': 'kjdlrrxscqefku',
+        'PASSWORD': 'cb9cdf3e1f7b42751e2dc825c3fe56144ca6166016324f9eb728e7d99056be8d',
+        'HOST': 'ec2-52-205-171-232.compute-1.amazonaws.com',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -115,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -127,7 +122,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -138,13 +132,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'front-end/build/static'
 ]
 
-
 django_heroku.settings(locals())
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-CORS_ALLOW_ALL_ORIGINS = True   
+CORS_ALLOW_ALL_ORIGINS = True
