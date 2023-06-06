@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import Button_Edit_Mechanic from '../components/features/Button_Edit_Mechanic'
 import  {
   useParams
 } from 'react-router-dom'
@@ -45,6 +46,7 @@ const MechanicDetail = ({match})  => {
     }}
     >
     delete</button>
+    <Button_Edit_Mechanic/>
 		</div>
 		)
 };

@@ -36,13 +36,13 @@ const ItemRepaired = ({repaired})  => {
         
 	return (
 	
-			<tr>
+			<tr><td>
 			<Link to={'/repaireds/'+ repaired.id}>
 			
-			<td>{repaired.id}</td>
-			</Link>
+			{repaired.id}
+			</Link></td>
 			<td>{repaired.car}</td>
-			
+
 			<td>
 				<Link to={'/cars/'+repaired.car}>
 				{car.name}
@@ -57,7 +57,7 @@ const ItemRepaired = ({repaired})  => {
 				</Link>
 			</td>
 			<td>{repaired.date_created}</td>
-			<td>{repaired.price}</td>
+			<td>{repaired.price}$</td>
 	</tr>
 	
 	

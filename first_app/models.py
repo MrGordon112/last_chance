@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.core import validators
 
 # Create your models here.
 
@@ -13,7 +14,8 @@ class Mechanic(models.Model):
     #  updated = models.DateTimeField(auto_now=True)
     # created=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.name + ' experience: ' + self.experience + ' price :' + self.price + ' age: ' + str(self.age) + 'description: ' + self.description
+        return self.name + ' experience: ' + self.experience + ' price :' + self.price + ' age: ' + str(
+            self.age) + 'description: ' + self.description
 
 
 class CarType(models.Model):
@@ -27,9 +29,12 @@ class CarType(models.Model):
     # created=models.DateTimeField(auto_now_add=True)
     # class Meta:
     #   ordering=['-updated','-created']
+    class Meta:
+        indexes = [models.Index(fields=['revenue'])]
 
     def __str__(self):
-        return self.name + ' revenue: ' + str(self.revenue) + ' nationality:  ' + self.nationality + ' year: ' + self.year + 'description: ' + self.description
+        return self.name + ' revenue: ' + str(
+            self.revenue) + ' nationality:  ' + self.nationality + ' year: ' + self.year + 'description: ' + self.description
 
 
 class Car(models.Model):
@@ -57,3 +62,13 @@ class Repaired(models.Model):
 
     def __str__(self):
         return str(self.id) + str(self.car) + ' ' + str(self.mechanic) + ' ' + self.date_created + ' ' + str(self.price)
+
+
+class UserProfile(models.Model):
+    first_name = models.CharField(max_length=70, default='')
+    last_name = models.CharField(max_length=70, default='')
+    about = models.CharField(max_length=1000, blank=True, null=True, default='')
+    gender = models.CharField(max_length=200, blank=True, null=True, default='')
+    birthday = models.CharField(max_length=200, blank=True, null=True, default='')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    email = models.EmailField(max_length=75, validators=[validators.EmailValidator()], unique=True)

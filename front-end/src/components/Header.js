@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {useState,useEffect} from 'react'
-
+import AuthContext from '../context/AuthContext'
 const Header = ()  => {
+    let {user, logoutUser}=useContext(AuthContext)
 
     
 
@@ -22,6 +23,14 @@ const Header = ()  => {
   <li>	<Link to={'/carTypes'}>
 			CarTypes
 		</Link></li>
+		{user?(
+		<li>	<Link onClick={logoutUser}>
+			Logout
+		</Link></li>):(<div> <li>	<Link to={'/login'}>
+			Login
+		</Link></li>   <li><Link to={'/sign_up'}>
+			Sign Up
+		</Link></li></div>)}
 </ul>
 <br/>
 </div>

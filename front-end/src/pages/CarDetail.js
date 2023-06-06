@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+
+import Button_Edit_Car from '../components/features/Button_Edit_Car'
 import  {
   useParams
 } from 'react-router-dom'
@@ -28,7 +30,7 @@ const DetailCar = ({match})  => {
 		<ul id="list-item">
     		<li>id :{car?.id}</li>
     		<li>name :{car?.name}</li>
-    		<li>price :{car?.price}</li>
+    		<li>price :{car?.price}$</li>
     		<li>year :{car?.year}</li>
     		<li>carType: {car?.carType}</li>
     		<li>description: {car?.description}</li>
@@ -47,7 +49,7 @@ const DetailCar = ({match})  => {
     }}
     >
     delete</button>
-    
+    <Button_Edit_Car/>
 		</div>
 		)
 };

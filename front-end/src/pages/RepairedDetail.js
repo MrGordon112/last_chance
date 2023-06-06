@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import  {
   useParams
 } from 'react-router-dom'
+import Button_Edit_Repaired from '../components/features/Button_Edit_Repaired'
 
 const RepairedDetail = ({match})  => {
     
@@ -25,10 +26,15 @@ const RepairedDetail = ({match})  => {
 		<div>
 		
 		<p>id:{repaired?.id}</p>
-		
+
+		<p>car id:{repaired?.car}</p>
+		<p>mechanic id:{repaired?.mechanic}</p>
+
+
+		<p>price:{repaired?.price}$</p>
 		<p>date:{repaired?.date_created}</p>
 		
-		<p>price:{repaired?.price}</p>
+		<p>price:{repaired?.price}$</p>
 		
 		<button className="delete" onClick={(e) => {
         fetch('/first_app/repaireds/'+repairedId,{method:"DELETE"})
@@ -41,6 +47,7 @@ const RepairedDetail = ({match})  => {
         ).catch((e)=>{console.log(e)});
     }}
     >delete</button>
+    <Button_Edit_Repaired />
 		</div>
 		)
 };
