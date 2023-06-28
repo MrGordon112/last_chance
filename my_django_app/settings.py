@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'first_app',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+    'channels',
 ]
 INTERNAT_IPS = [
     '127.0.0.1',
@@ -93,17 +94,17 @@ WSGI_APPLICATION = 'my_django_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Linda',
-        'USER': 'postgres',
-        'PASSWORD': 'daniel112',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'd7b33vcfevcm7c',
-        # 'USER': 'kjdlrrxscqefku',
-        # 'PASSWORD': 'cb9cdf3e1f7b42751e2dc825c3fe56144ca6166016324f9eb728e7d99056be8d',
-        # 'HOST': 'ec2-52-205-171-232.compute-1.amazonaws.com',
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'Linda',
+        #'USER': 'postgres',
+        #'PASSWORD': 'daniel112',
+        #'HOST': 'localhost',
+        #'PORT': '5432',
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'd7b33vcfevcm7c',
+         'USER': 'kjdlrrxscqefku',
+         'PASSWORD': 'cb9cdf3e1f7b42751e2dc825c3fe56144ca6166016324f9eb728e7d99056be8d',
+         'HOST': 'ec2-52-205-171-232.compute-1.amazonaws.com',
     }
 }
 
@@ -197,4 +198,24 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+STATIC_URL = '/static/'
+ASGI_APPLICATION = "my_django_app.routing.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": 'REDIS_URL',
+        },
+    },
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 export default function Add_Repaired() {
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [inputs, setInputs] = useState({
     car:0,
     mechanic:0,
@@ -16,7 +18,7 @@ export default function Add_Repaired() {
                 throw new Error('not added')
             }
         }
-        ).catch((e)=>{console.log(e)});
+        ).catch((e)=>{setErrorMessage('not added')});
     }
 
 
@@ -25,21 +27,21 @@ export default function Add_Repaired() {
   return (
     <form onSubmit={handleSubmit}
     >
-      <label>Enter id car:
+      <label>Enter id car: must exist
       <input
         type="number"
         name="car"
         onChange={(event) => setInputs({...inputs, car: event.target.value})}
       />
         </label>
-        <label>Enter mechanic id:
+        <label>Enter mechanic id: must exist
       <input
         type="number"
         name="mechanic"
          onChange={(event) => setInputs({...inputs, mechanic: event.target.value})}
       />
       </label>
-      <label>Enter date_created:
+      <label>Enter date_created: not after the current day
       <input
         type="text"
         name="date_created"
@@ -47,7 +49,7 @@ export default function Add_Repaired() {
       />
 
       </label>
-      <label>Enter price:
+      <label>Enter price: positive
         <input
           type="number"
           name="price"
@@ -56,6 +58,7 @@ export default function Add_Repaired() {
         </label>
 
         <input type="submit" />
+        {errorMessage && <div className="error"> {errorMessage} </div>}
     </form>
   )
 }

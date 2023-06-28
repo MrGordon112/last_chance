@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
 import Button_Edit_CarType from '../components/features/Button_Edit_CarType'
 import  {
   useParams
@@ -23,7 +24,21 @@ const CarTypeDetail = ({match})  => {
         }
 
      let navigate = useNavigate();
-    
+
+        const Delete = async () => {
+		var result = window.confirm("Want to delete?");
+        if (result){
+        fetch('/first_app/carTypes/'+carTypeId,{method:"DELETE"})
+        .then((response)=>{
+            if(!response.ok){
+                throw new Error('not deleted')
+            }
+            navigate('/carTypes');
+        }
+        ).catch((e)=>{console.log(e)});
+    }}
+
+
 	return (
 		
 				<div>
@@ -35,18 +50,8 @@ const CarTypeDetail = ({match})  => {
     		<li>year: {carType?.year}</li>
     		<li>description: {carType?.description}</li>
 		</ul>
-			<button className="delete" onClick={(e) => {
-        fetch('/first_app/carTypes/'+carTypeId,{method:"DELETE"})
-        .then((response)=>{
-            if(!response.ok){
-                throw new Error('not deleted')
-            }
-            navigate('/carTypes');
-        }
-        ).catch((e)=>{console.log(e)});
-    }}
-    >
-    delete</button>
+
+    <button className="delete" onClick={Delete}>Delete</button>
     <Button_Edit_CarType/>
 		</div>
 		)

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 export default function Add_CarType() {
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [inputs, setInputs] = useState({
     name:"",
     revenue:0,
@@ -17,7 +19,7 @@ export default function Add_CarType() {
                 throw new Error('not added')
             }
         }
-        ).catch((e)=>{console.log(e)});
+        ).catch((e)=>{setErrorMessage('not added')});
     }
 
 
@@ -26,14 +28,14 @@ export default function Add_CarType() {
   return (
     <form onSubmit={handleSubmit}
     >
-      <label>Enter carType name:
+      <label>Enter carType name:(no restriction)
       <input
         type="text"
         name="name"
         onChange={(event) => setInputs({...inputs, name: event.target.value})}
       />
       </label>
-      <label>Enter carType revenue:
+      <label>Enter carType revenue:(no restriction)
         <input
           type="number"
           name="revenue"
@@ -41,7 +43,7 @@ export default function Add_CarType() {
         />
         </label>
 
-        <label>Enter carType's nationality:
+        <label>Enter carType's nationality:(no restriction)
       <input
         type="text"
         name="nationality"
@@ -49,7 +51,7 @@ export default function Add_CarType() {
       />
       </label>
 
-      <label>Enter carType's founded year :
+      <label>Enter carType's founded year :  (> 1900)
       <input
         type="text"
         name="year"
@@ -59,7 +61,7 @@ export default function Add_CarType() {
 
          <div>
 
-         <label>Details:
+         <label>Details:(no restriction)
 
          <textarea type="text" id="subject"
          name="detail" placeholder="Write something.."
@@ -68,6 +70,7 @@ export default function Add_CarType() {
         </label>
         </div>
         <input type="submit" />
+        {errorMessage && <div className="error"> {errorMessage} </div>}
     </form>
   )
 }

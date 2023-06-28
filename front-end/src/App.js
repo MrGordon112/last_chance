@@ -18,7 +18,7 @@ import RepairedList from './pages/RepairedList'
 import RepairedDetail from './pages/RepairedDetail'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
-
+import ChatAppPage from './pages/ChatAppPage'
 function App() {
   return (
   <div className="Container">
@@ -32,6 +32,7 @@ function App() {
       <Route path = "/" exact element={<CarList/>} />
       <Route path = "/cars/:id" element={<CarDetail/>} />
       <Route path = "/mechanics" element={<MechanicList/>} />
+     <Route path = "/chatApp" element={<ChatAppPage/>} />
       <Route path = "/mechanics/:id" element={<MechanicDetail/>} />
 
       <Route path = "/carTypes" element={<CarTypeList/> } />

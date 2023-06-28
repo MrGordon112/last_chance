@@ -42,7 +42,7 @@ def put_user_together(username, email, password):
 def generate(nr, batch_size=100):
     print("GENERATING USERS ")
 
-    file_u = open('data_generation/insert_data.sql', 'a')
+    file_u = open('data_generation/insert_data_users.sql', 'a')
 
     file_u.write('ALTER TABLE auth_user DISABLE TRIGGER ALL; TRUNCATE auth_user RESTART IDENTITY CASCADE;\n')
 
@@ -84,4 +84,4 @@ def generate(nr, batch_size=100):
     file_u.close()
 
 
-generate(1000, 100)
+generate(100, 100)

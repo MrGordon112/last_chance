@@ -393,4 +393,27 @@ input[type=submit]:hover {
   height:20%px;
   
 }
+@media only screen and (max-width: 700px) {
+  body {
+    background-color: lightblue;
 
+  }
+  th, td {
+    text-align: left;
+    padding: 0px 0px;
+    margin:0px;
+   table {
+   font-size: 50px;
+   }
+
+
+}
+.notes-header{
+}
+
+
+}
+.error{
+background:red;
+size:40px;
+}
