@@ -1,5 +1,6 @@
 from django.db.models import Avg
 from django.http import JsonResponse
+from django.shortcuts import render
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework_simplejwt.tokens import AccessToken
 
@@ -33,10 +34,18 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+def room(request, room_name):
+    return render(request, 'room.html', {
+        'room_name': room_name
+    })
+
+def index(request):
+    return render(request, 'index1.html', {})
+
 # VALIDATORS #
 def validate_age(value):
-    if int(value) < 10 or int(value) > 110:
-        raise Exception("age must be between 10 and 110")
+    if int(value) < 16 or int(value) > 110:
+        raise Exception("age must be between 16 and 110")
     return value
 
 
@@ -49,6 +58,11 @@ def validate_price(value):
 def validate_year(value):
     if int(value) > year:
         raise Exception("the repair date cannot be after today")
+        return False
+    return True
+def validate_year_1900(value):
+    if int(value) < 1900:
+        raise Exception("the carType cannot be older than 1900")
         return False
     return True
 
@@ -85,6 +99,8 @@ def car_list(request, format=None):
 
     if request.method == 'POST':
         if not validate_year(request.data['year']):
+            return
+        if not validate_price(request.data['price']):
             return
         serializer = CarSerializer(data=request.data)
         if serializer.is_valid():
@@ -132,6 +148,9 @@ def carType_list(request, format=None):
         return Response(serializer.data)
 
     if request.method == 'POST':
+        if not validate_year_1900(request.data['year']):
+            return
+        validate_year_1900(request.data['year'])
         serializer = CarTypeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -173,6 +192,7 @@ def carType_detail(request, id, format=None):
     elif request.method == 'PUT':
         serializer = CarTypeSerializer(carType, data=request.data)
         if serializer.is_valid():
+
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -342,7 +362,7 @@ def repaired_list(request, format=None):
         return Response(serializer.data)
 
     if request.method == 'POST':
-        if not validate_price(request.data['date']):
+        if not validate_price(request.data['price']):
             return
         serializer = RepairedSerializer(data=request.data)
         if serializer.is_valid():

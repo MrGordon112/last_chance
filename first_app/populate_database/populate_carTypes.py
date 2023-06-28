@@ -48,4 +48,4 @@ def generate(nr, batch_size=1000):
     file.close()
 
 
-generate(1000, 100)
+generate(10000, 1000)

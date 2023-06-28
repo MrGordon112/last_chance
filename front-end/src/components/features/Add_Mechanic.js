@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 export default function Add_Mechanic() {
+   const [errorMessage, setErrorMessage] = useState("");
   const [inputs, setInputs] = useState({
     name:"",
     experience:"",
@@ -17,7 +18,7 @@ export default function Add_Mechanic() {
                 throw new Error('not added')
             }
         }
-        ).catch((e)=>{console.log(e)});
+        ).catch((e)=>{setErrorMessage('not added')});
     }
 
 
@@ -26,21 +27,21 @@ export default function Add_Mechanic() {
   return (
     <form onSubmit={handleSubmit}
     >
-      <label>Enter mechanics name:
+      <label>Enter mechanics name: (no restriction)
       <input 
         type="text" 
         name="name"
         onChange={(event) => setInputs({...inputs, name: event.target.value})}
       />
         </label>
-        <label>Enter mechanic's experience:
+        <label>Enter mechanic's experience: (no restriction)
       <input
         type="text" 
         name="experience" 
          onChange={(event) => setInputs({...inputs, experience: event.target.value})}
       />   
       </label>
-      <label>Enter mechanic's price:
+      <label>Enter mechanic's price: from $ to $$$$$
       <input 
         type="text" 
         name="price" 
@@ -48,7 +49,7 @@ export default function Add_Mechanic() {
       />
        
       </label>
-      <label>Enter mechanics age:
+      <label>Enter mechanics age: between 16-110
         <input 
           type="number" 
           name="age" 
@@ -67,6 +68,7 @@ export default function Add_Mechanic() {
         </label>
         </div>
         <input type="submit" />
+        {errorMessage && <div className="error"> {errorMessage} </div>}
     </form>
   )
 }

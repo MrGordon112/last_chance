@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
 
 import Button_Edit_Car from '../components/features/Button_Edit_Car'
 import  {
@@ -23,8 +24,23 @@ const DetailCar = ({match})  => {
         setCar(data)        
         }
     let navigate = useNavigate();
-        
-    
+
+
+       const Delete = async () => {
+		var result = window.confirm("Want to delete?");
+        if (result) {
+    //Logic to delete the item
+
+        fetch('/first_app/cars/'+carId,{method:"DELETE"})
+        .then((response)=>{
+            if(!response.ok){
+                throw new Error('not deleted')
+            }
+            navigate('/');
+        }
+        ).catch((e)=>{console.log(e)});
+    }}
+
 	return (
 		<div>
 		<ul id="list-item">
@@ -36,19 +52,8 @@ const DetailCar = ({match})  => {
     		<li>description: {car?.description}</li>
 		</ul>
 		
-		
-		<button className="delete" onClick={(e) => {
-        fetch('/first_app/cars/'+carId,{method:"DELETE"})
-        .then((response)=>{
-            if(!response.ok){
-                throw new Error('not deleted')
-            }
-            navigate('/');
-        }
-        ).catch((e)=>{console.log(e)});
-    }}
-    >
-    delete</button>
+
+     <button className="delete" onClick={Delete}>Delete</button>
     <Button_Edit_Car/>
 		</div>
 		)

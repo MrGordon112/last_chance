@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 export default function Add_Car() {
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [inputs, setInputs] = useState({
     name:"",
     description:"",
@@ -15,9 +17,10 @@ export default function Add_Car() {
         .then((response)=>{
             if(!response.ok){
                 throw new Error('not added')
-            }
+            }else{
+            alert('added')}
         }
-        ).catch((e)=>{console.log(e)});
+        ).catch((e)=>{setErrorMessage('not added')});
     }
 
 
@@ -26,21 +29,21 @@ export default function Add_Car() {
   return (
     <form onSubmit={handleSubmit}
     >
-      <label>Enter car name:
+      <label>Enter car name: no restrictions
       <input
         type="text"
         name="name"
         onChange={(event) => setInputs({...inputs, name: event.target.value})}
       />
         </label>
-        <label>Enter year of fabrication:
+        <label>Enter year of fabrication: cannot be after present year
       <input
         type="number"
         name="year"
          onChange={(event) => setInputs({...inputs, year: event.target.value})}
       />
       </label>
-      <label>Enter car's price:
+      <label>Enter car's price:  needs to be positive
       <input
         type="number"
         name="price"
@@ -48,7 +51,7 @@ export default function Add_Car() {
       />
 
       </label>
-      <label>Enter carType id:
+      <label>Enter carType id: must exists
         <input
           type="number"
           name="carType"
@@ -58,7 +61,7 @@ export default function Add_Car() {
         </label>
          <div>
 
-         <label>Details:
+         <label>Details:  no restrictions
 
          <textarea type="text" id="subject"
          name="detail" placeholder="Write something.."
@@ -67,6 +70,7 @@ export default function Add_Car() {
         </label>
         </div>
         <input type="submit" />
+        {errorMessage && <div className="error"> {errorMessage} </div>}
     </form>
   )
 }

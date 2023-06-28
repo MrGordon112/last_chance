@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
 import  {
   useParams
 } from 'react-router-dom'
@@ -21,7 +22,19 @@ const RepairedDetail = ({match})  => {
         setRepaired(data)        
         }
         let navigate = useNavigate();
-    
+
+     const Delete = async () => {
+		var result = window.confirm("Want to delete?");
+        if (result) {fetch('/first_app/repaireds/'+repairedId,{method:"DELETE"})
+        .then((response)=>{
+            if(!response.ok){
+                throw new Error('not deleted')
+            }
+            navigate('/repaireds');
+        }
+        ).catch((e)=>{console.log(e)});
+    }}
+
 	return (
 		<div>
 		
@@ -36,18 +49,8 @@ const RepairedDetail = ({match})  => {
 		
 		<p>price:{repaired?.price}$</p>
 		
-		<button className="delete" onClick={(e) => {
-        fetch('/first_app/repaireds/'+repairedId,{method:"DELETE"})
-        .then((response)=>{
-            if(!response.ok){
-                throw new Error('not deleted')
-            }
-            navigate('/repaireds');
-        }
-        ).catch((e)=>{console.log(e)});
-    }}
-    >delete</button>
-    <Button_Edit_Repaired />
+		<button className="delete" onClick={Delete}>Delete</button>
+        <Button_Edit_Repaired />
 		</div>
 		)
 };
